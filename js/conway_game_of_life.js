@@ -51,25 +51,33 @@ function checkPoint(x, y, status){
   neighborArray[5] = checkSouthWest();
   neighborArray[6] = checkWest();
   neighborArray[7] = checkNorthWest();
-
-  return checkAgainstRules(status);
+  neighborAliveCount = neighborArray.reduce(add, 0);
+  return checkAgainstRules(status, neighborAliveCount);
 
 }
 
-function checkAgainstRules(status){
+function checkAgainstRules(status, neighborAliveCount){
   if (status === 1){
-    checkLiveRules();
+    checkLiveRules(neighborAliveCount);
   } else {
-    checkDeadRules();
+    checkDeadRules(neighborAliveCount);
   }
 }
 
-function checkLiveRules(){
+function checkLiveRules(neighborAliveCount){
 
 }
 
-function checkDeadRules(){
-  
+function checkDeadRules(neighborAliveCount){
+  if (neighborAliveCount === 3){
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function add(num1, num2){
+  return a + b;
 }
 
 
