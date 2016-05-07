@@ -28,9 +28,9 @@ currentArray[1][4] = 1;
 currentArray[2][4] = 1;
 currentArray[3][4] = 1;
 // currentArray[4][1] = 1;
-
+var sleep = require('sleep');
 while (gameOn){
-
+  sleep.sleep(1);
   var counter = 0;
   for (var i = 0; i < currentArray.length; i++){
     var innerArray = currentArray[i];
