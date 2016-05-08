@@ -1,3 +1,5 @@
+live version can be found at: https://htmlpreview.github.io/?https://github.com/graymd/conway_game_of_life_AngularJS/blob/master/index.html
+
 Create a game of life simulation in AngularJS
 
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
