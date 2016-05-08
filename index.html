@@ -2,32 +2,39 @@
 <html lang="en" ng-app="myApp">
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <meta charset="UTF-8">
   <title></title>
 </head>
 <body ng-controller="myCtrl">
-<div>
-  Current board: W: {{width}} x H: {{height}}
-</div>
-  <div>
-  <form ng-submit="updateBoardSize(gameInputs)">
-    Enter Number of rows: 
-    <input type="text" ng-model="gameInputs.width"/>
-    <br>
-    Enter Number of columns: 
-    <input type="text" ng-model="gameInputs.height"/>
-    <br>
-    <button type="submit" class="btn btn-info">Update Board Size / Reset</button>
-    </form>
-    <button type="submit" class="btn btn-info" ng-click="nextIteration()">Next Iteration</button>
-  </div>
+  <div id="wrapper">
+    <div class="container-fluid">
+      <div>
+        Current board: W: {{width}} x H: {{height}}
 
-  <div ng-repeat="node in nodes">
-    {{node}}
-  </div>
+        <form novalidate ng-submit="updateBoardSize(gameInputs)" name="boardForm">
+          Enter Number of rows: 
+          <input type="text" ng-model="gameInputs.width" required/>
+          <br>
+          Enter Number of columns: 
+          <input type="text" ng-model="gameInputs.height" required/>
+          <br>
+          <button type="submit" class="btn btn-info" ng-disabled="boardForm.$invalid">Update Board Size / Reset</button>
+        </form>
 
-  <script src="./js/jquery-1.12.3.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <br>
+        <button type="submit" class="btn btn-info" ng-click="nextIteration()">Next Iteration</button>
+      </div>
+      <br>
+      <table id="nodes">
+        <tr ng-repeat="row in nodes">
+          <td ng-repeat="col in row track by $index">
+            {{col}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <script src="./js/test.js"></script>
 
