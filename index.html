@@ -1,24 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="myApp">
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <meta charset="UTF-8">
   <title></title>
 </head>
-<body>
-  <div ng-init="hello='world'">
+<body ng-controller="myCtrl">
+<div>
+  Current board: W: {{width}} x H: {{height}}
+</div>
+  <div>
+  <form ng-submit="updateBoardSize(gameInputs)">
     <!-- <h1>{{hello}}</h1> -->
     Enter Number of rows: 
-    <input type="text" ng-model="hello"/>
+    <input type="text" ng-model="gameInputs.width"/>
     <br>
     Enter Number of columns: 
-    <input type="text" ng-model="hello"/>
+    <input type="text" ng-model="gameInputs.height"/>
     <br>
-    <button type="button" ng-click="stopGame();" class="btn btn-link">Start GoL</button>
+    <button type="submit" class="btn btn-info">Update Board Size / Reset</button>
+    </form>
+    <button type="submit" class="btn btn-info" ng-click="nextIteration()">Next Iteration</button>
+  </div>
+
+  <div ng-repeat="node in nodes">
+    {{node}}
   </div>
 
   <script src="./js/jquery-1.12.3.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="./js/test.js"></script>
+  <!-- <script src="./js/conway_game_of_life.js"></script> -->
 </body>
 </html>

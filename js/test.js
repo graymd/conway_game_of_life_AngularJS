@@ -1,43 +1,60 @@
-// Calculate number of cells to be displayed
-// Set random alive cells in a 2D array
-// Perform logic to figure out what the next set of alive cells should be
-// Set next array to current array to display
-// continuously perform this logic
+var myApp = angular.module("myApp", []);
 
-var width = 10;
-var height = 10;
-var gameOn = true;
+var myCtrl = myApp.controller('myCtrl', function($scope, $timeout){
+  // $scope.nodes = playGame();
+  $scope.width = 10;
+  $scope.height = 10;
+  $scope.nodes = createCurrentArray($scope.width, $scope.height);
 
+  $scope.nextIteration = function() {
+    nextIteration($scope.width, $scope.height, $scope.nodes);
+  } 
+    
+  $scope.updateBoardSize = function() {
+    var intWidth = parseInt($scope.gameInputs.width);
+    var intHeight = parseInt($scope.gameInputs.height);
+    updatedBoard = createCurrentArray(intWidth, intHeight);
+    console.log(updatedBoard);
+    $scope.nodes = updatedBoard;
+    $scope.width = intWidth;
+    $scope.height = intHeight;
+  }
 
-var startingArray = new Array(width).fill(0);
-for (var i = 0; i < startingArray.length; i++) {
-  startingArray[i] = new Array(width).fill(0);
+// var gameOn = true;
+
+function createCurrentArray(width, height){
+  var currentArray = new Array(width).fill(0);
+  for (var i = 0; i < currentArray.length; i++) {
+    currentArray[i] = new Array(height).fill(0);
+  } 
+
+  for (var i = 0; i < currentArray.length; i++){
+    var innerArray = currentArray[i];
+    for (var j = 0; j < innerArray.length; j++){
+      currentArray[i][j] = randomAliveDead();
+    }
+  }
+
+  return currentArray;
 }
 
-var nextArray = new Array(width).fill(0);
-for (var i = 0; i < nextArray.length; i++) {
+function randomAliveDead(){
+  return Math.round(Math.random());
+}
+
+function createNextArray(width, height){
+  var nextArray = new Array(width).fill(0);
+  for (var i = 0; i < nextArray.length; i++) {
   nextArray[i] = new Array(width).fill(0);
+ }
+ return nextArray;
 }
 
-
-// console.log(startingArray);
-function currentArray(){
-  currentArray = startingArray;
-  currentArray[1][4] = 1;
-  currentArray[2][4] = 1;
-  currentArray[3][4] = 1;
-}
-
-// currentArray[0][1] = 1;
-
-// currentArray[4][1] = 1;
-
-
-function playGame(){
-  var sleep = require('sleep');
-  while (gameOn){
-    sleep.sleep(1);
-    var counter = 0;
+function nextIteration(width, height, currentState){
+  currentArray = currentState;
+  nextArray = createNextArray(width, height);
+  // while (gameOn){
+    // var counter = 0;
     for (var i = 0; i < currentArray.length; i++){
       var innerArray = currentArray[i];
       for (var j = 0; j < innerArray.length; j++){
@@ -45,21 +62,19 @@ function playGame(){
         // console.log(updatePoint(i, j, innerArray[j]));
         newAliveOrDead = updatePoint(i, j, innerArray[j]);
         nextArray[i][j] = newAliveOrDead;
-        counter += newAliveOrDead;
+        // counter += newAliveOrDead;
         
         //Method to updatePointAlive() || updatePointDead();
       }
 
     }
 
-    console.log(nextArray);
+    // console.log(nextArray);
     currentArray = nextArray;
-    var nextArray = new Array(width).fill(0);
-    for (var i = 0; i < nextArray.length; i++) {
-      nextArray[i] = new Array(width).fill(0);
-    }
-    checkGameOn(counter);
-  }
+    nextArray = createNextArray(width, height);
+    $scope.nodes = currentArray;
+    // checkGameOn(counter); 
+  // }
 }
 
 
@@ -217,12 +232,4 @@ function checkNorthWest(x, y) {
     return 0;
   }
 }
-
-
-
-
-
-
-
-
-
+});
