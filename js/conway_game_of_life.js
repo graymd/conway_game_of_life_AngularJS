@@ -1,6 +1,6 @@
 var conwayGameOfLifeApp = angular.module("conwayGameOfLifeApp", []);
 
-var conwayGameOfLifeCtrl = conwayGameOfLifeApp.controller('conwayGameOfLifeCtrl', function($scope, $timeout){
+var conwayGameOfLifeCtrl = conwayGameOfLifeApp.controller('conwayGameOfLifeCtrl', function($scope, $interval){
   $scope.width = 10;
   $scope.height = 10;
   $scope.nodes = createCurrentArray($scope.width, $scope.height);
@@ -17,6 +17,24 @@ var conwayGameOfLifeCtrl = conwayGameOfLifeApp.controller('conwayGameOfLifeCtrl'
     $scope.width = intWidth;
     $scope.height = intHeight;
   }
+
+  $scope.resetGame = function(){
+    $scope.nodes = createCurrentArray($scope.width, $scope.height);
+  }
+
+ $scope.gameOn = null;
+
+ $scope.startGame = function () {
+    $scope.gameOn = $interval(function () {
+      $scope.nextIteration();
+      }, 500);
+  };
+
+  $scope.stopGame = function () {
+    if (angular.isDefined($scope.gameOn)) {
+      $interval.cancel($scope.gameOn);
+    }
+  };
 
   function createCurrentArray(width, height){
     var currentArray = new Array(width).fill(0);
@@ -58,12 +76,6 @@ var conwayGameOfLifeCtrl = conwayGameOfLifeApp.controller('conwayGameOfLifeCtrl'
       currentArray = nextArray;
       $scope.nodes = currentArray;
   }
-
-  // function checkGameOn(counter){
-  //   if (counter === 0){
-  //     gameOn = false;
-  //   }
-  // }
 
   function updatePoint(x, y, status){
 

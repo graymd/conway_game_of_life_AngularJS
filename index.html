@@ -4,14 +4,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <meta charset="UTF-8">
-  <title></title>
+  <title>Malachi's Conway's Game of Life</title>
 </head>
 <body ng-controller="conwayGameOfLifeCtrl">
   <div id="wrapper">
     <div class="container-fluid">
+    <h1>Conway's Game of Life</h1>
       <div>
         Current board: W: {{width}} x H: {{height}}
-
         <form novalidate ng-submit="updateBoardSize(gameInputs)" name="boardForm">
           Enter Number of rows: 
           <input type="text" ng-model="gameInputs.width" required/>
@@ -21,22 +21,27 @@
           <br>
           <button type="submit" class="btn btn-info" ng-disabled="boardForm.$invalid">Update Board Size / Reset</button>
         </form>
-
         <br>
-        <button type="submit" class="btn btn-info" ng-click="nextIteration()">Next Iteration</button>
+        <div>
+          <button class="btn btn-info btn-sm" ng-click="nextIteration()">Next Iteration</button>
+          <button class="btn btn-info btn-sm" ng-click="startGame()">Start Game</button>
+          <button class="btn btn-info btn-sm" ng-click="stopGame()">Stop Game</button>
+          <button class="btn btn-info btn-sm" ng-click="resetGame()">Reset Game</button>
+        </div>
       </div>
       <br>
-      <table id="nodes">
-        <tr ng-repeat="row in nodes">
-          <td ng-repeat="col in row track by $index">
-            {{col}}
-          </td>
-        </tr>
-      </table>
+      <div>
+        <table id="nodes">
+          <tr ng-repeat="row in nodes">
+            <td ng-repeat="col in row track by $index">
+              {{col}}
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <script src="./js/conway_game_of_life.js"></script>
-
 </body>
 </html>
