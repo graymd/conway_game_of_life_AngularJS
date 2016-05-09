@@ -8,3 +8,15 @@ table {
   width: 100%;
 }
 
+table td {
+  text-align: center;
+}
+
+.black {
+  background-color: black;
+}
+
+.white {
+  background-color: white;
+}
+

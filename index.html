@@ -33,7 +33,7 @@
       <div>
         <table id="nodes">
           <tr ng-repeat="row in nodes">
-            <td ng-repeat="col in row track by $index">
+            <td ng-repeat="col in row track by $index" ng-class="{1:'white', 0:'black'}[col]">
               {{col}}
             </td>
           </tr>

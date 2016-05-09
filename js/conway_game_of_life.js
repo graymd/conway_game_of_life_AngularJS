@@ -22,6 +22,10 @@ var conwayGameOfLifeCtrl = conwayGameOfLifeApp.controller('conwayGameOfLifeCtrl'
     $scope.nodes = createCurrentArray($scope.width, $scope.height);
   }
 
+  // $scope.getColumnColor = function(aliveOrDead){
+  //   aliveOrDead === 1 ? "white" : "black";
+  // }
+
  $scope.gameOn = null;
 
  $scope.startGame = function () {
